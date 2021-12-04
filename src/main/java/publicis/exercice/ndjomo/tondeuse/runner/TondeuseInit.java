@@ -13,9 +13,5 @@ public class TondeuseInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
 
-        int i = 1;
-        i++;
-        System.out.println("C'est bon " + i);
-
     }
 }
