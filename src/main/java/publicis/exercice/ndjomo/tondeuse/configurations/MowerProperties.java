@@ -6,6 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.nio.file.Path;
+
 /**
  * Cette classe permet de lire les paramétres du fichier de properties
  */
@@ -14,14 +16,23 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "tondeuse")
 @Getter
 @Setter
-public class ApplicationProperties {
-    public Origine origine;
+public class MowerProperties {
+
+    public Origine  origine = new Origine();
+    public Folder   folder  = new Folder();
 
     @Getter
     @Setter
-    class Origine {
-        private int x;
-        private int y;
-        private char orientation;
+    public static class Origine {
+        private int     x;
+        private int     y;
+        private char    orientation;
+    }
+
+    @Getter
+    @Setter
+    public static class Folder {
+        private Path instruction;
+        private Path archive;
     }
 }

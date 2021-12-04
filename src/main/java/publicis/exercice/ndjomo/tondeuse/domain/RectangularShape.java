@@ -1,6 +1,5 @@
 package publicis.exercice.ndjomo.tondeuse.domain;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import publicis.exercice.ndjomo.tondeuse.domain.abstracts.Form;
 
@@ -19,28 +18,32 @@ public class RectangularShape implements Form<Coordinate> {
      */
     private Coordinate cornerCoodinate;
 
+    /**
+     * Initialisation à partir d'une chaine
+     * @param locate
+     * @throws Exception
+     */
     @Override
-    public void init(Coordinate currentCoodinat) {
-        this.currentCoodinat = currentCoodinat;
+    public void init (String locate) throws Exception {
+        this.currentCoodinat = new Coordinate(locate);
     }
-
     /**
      * Faire bouger la tondeuse
      * @param movement
      * @return
      */
     @Override
-    public void move(char movement, Coordinate cornerCoodinate) {
+    public void move(char movement, Coordinate cornerCoodinate) throws Exception {
         currentCoodinat.move(movement, cornerCoodinate);
     }
 
     /**
      * Fixer la bordure supérieur droite
-     * @param cornerCoodinate
+     * @param string
      */
     @Override
-    public void limit(Coordinate cornerCoodinate) {
-        this.cornerCoodinate = cornerCoodinate;
+    public void limit(String string) throws Exception {
+        cornerCoodinate = new Coordinate(string);
     }
 
     /**
@@ -53,5 +56,22 @@ public class RectangularShape implements Form<Coordinate> {
     public boolean isEquals(Coordinate c1, Coordinate c2) {
         if(c1.getX() == c2.getX() && c1.getY() == c2.getY()) return true;
         return false;
+    }
+
+    @Override
+    public String locate() {
+        return currentCoodinat.toString();
+    }
+
+    /**
+     * Marcher sur un rectange
+     * @param instruction
+     */
+    @Override
+    public void walk(String instruction) throws Exception {
+        char[] ch = instruction.toCharArray();
+        for(char c : ch) {
+            currentCoodinat.move(c, cornerCoodinate);
+        }
     }
 }

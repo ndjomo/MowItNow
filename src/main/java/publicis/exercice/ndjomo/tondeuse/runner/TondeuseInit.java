@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import publicis.exercice.ndjomo.tondeuse.configurations.MowerProperties;
 import publicis.exercice.ndjomo.tondeuse.exception.BuisnessException;
 
-import java.nio.file.Path;
 import java.util.List;
 
 /**

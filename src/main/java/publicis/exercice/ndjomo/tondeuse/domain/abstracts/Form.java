@@ -7,12 +7,13 @@ package publicis.exercice.ndjomo.tondeuse.domain.abstracts;
  */
 public interface Form <T> {
 
-    /**
-     * initialise la forme
-     * @param location
-     */
-    public void init(T location);
 
+    /**
+     * Construit une position à partir d'une chaine
+     * @param locate
+     * @return
+     */
+    public void init(String locate) throws Exception;
 
     /**
      * Déplacement de la tondeuse
@@ -20,13 +21,13 @@ public interface Form <T> {
      * @param movement type de mouvenemt à effectuer
      * @param location La limite de la surface
      */
-    public void move(char movement, T location);
+    public void move(char movement, T location) throws Exception;
 
     /**
      * Fixe les limites de la forme
-     * @param location
+     * @param string
      */
-    public void limit(T location);
+    public void limit(String string)  throws Exception;
 
     /**
      * Comparaison de deux position
@@ -35,4 +36,17 @@ public interface Form <T> {
      * @return
      */
     public boolean isEquals(T location1, T location2);
+
+    /**
+     * Affichage d'une position
+     * @return
+     */
+    public String locate();
+
+    /**
+     * Parcourir la forme
+     * @param instruction
+     */
+    public void walk(String instruction) throws Exception;
+
 }
