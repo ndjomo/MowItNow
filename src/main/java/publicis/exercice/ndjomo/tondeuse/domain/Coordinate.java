@@ -1,5 +1,6 @@
 package publicis.exercice.ndjomo.tondeuse.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import publicis.exercice.ndjomo.tondeuse.utils.CircularList;
@@ -8,17 +9,12 @@ import java.util.Arrays;
 
 @Getter
 @Setter
+@Builder
 public class Coordinate {
     private int x;
     private int y;
     private char orientation;
     private CircularList<Character> directions = (CircularList<Character>) Arrays.asList('W','N','E','S');
-
-    public Coordinate(int x, int y, char orientation) {
-        this.x = x;
-        this.y = y;
-        this.orientation = orientation;
-    }
 
     public void move(char movement, Coordinate cornerCoodinate) {
         int indexCourant = directions.get(orientation);
