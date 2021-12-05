@@ -13,7 +13,7 @@ public interface Form <T> {
      * @param locate
      * @return
      */
-    public void init(String locate) throws Exception;
+    void init(String locate) throws Exception;
 
     /**
      * Déplacement de la tondeuse
@@ -21,13 +21,13 @@ public interface Form <T> {
      * @param movement type de mouvenemt à effectuer
      * @param location La limite de la surface
      */
-    public void move(char movement, T location) throws Exception;
+    void move(char movement, T location) throws Exception;
 
     /**
      * Fixe les limites de la forme
      * @param string
      */
-    public void limit(String string)  throws Exception;
+    void limit(String string)  throws Exception;
 
     /**
      * Comparaison de deux position
@@ -35,18 +35,18 @@ public interface Form <T> {
      * @param location2
      * @return
      */
-    public boolean isEquals(T location1, T location2);
+    boolean isEquals(T location1, T location2);
 
     /**
      * Affichage d'une position
      * @return
      */
-    public void locate();
+    void locate();
 
     /**
      * Parcourir la forme
      * @param instruction
      */
-    public void walk(String instruction) throws Exception;
+    void walk(String instruction) throws Exception;
 
 }

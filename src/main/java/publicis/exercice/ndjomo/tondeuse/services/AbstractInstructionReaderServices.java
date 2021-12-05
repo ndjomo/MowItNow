@@ -7,6 +7,6 @@ package publicis.exercice.ndjomo.tondeuse.services;
  */
 public interface AbstractInstructionReaderServices<E, T> {
 
-    public T read(E e) throws Exception;
+    T read(E e) throws Exception;
 
 }

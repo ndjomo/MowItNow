@@ -6,5 +6,5 @@ package publicis.exercice.ndjomo.tondeuse.services;
  * @param <U>
  */
 public interface AbstractArchiveProgram<T, U> {
-    public void archiv(T source, U target) throws Exception;
+    void archiv(T source, U target) throws Exception;
 }

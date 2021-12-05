@@ -29,7 +29,7 @@ public class FlatFileInstructionReaderImpl implements AbstractInstructionReaderS
         try {
             instructions = Files.readAllLines(path);
         } catch (IOException e) {
-            log.warn("Pas de fichier d'instruction et / ou erreur de lecture. En attente ...");
+            log.warn("Pas de fichier d'instruction et/ou erreur de lecture. En attente ...");
         }
         return instructions;
     }
