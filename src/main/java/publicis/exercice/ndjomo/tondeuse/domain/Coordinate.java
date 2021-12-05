@@ -84,6 +84,6 @@ public class Coordinate {
                 .append(x).append(" ")
                 .append(y).append(" ")
                 .append(orientation)
-                .toString();
+                .toString().trim();
     }
 }
