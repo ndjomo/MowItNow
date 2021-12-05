@@ -22,16 +22,19 @@ conserve son orientation et traite la commande suivante.
 On présuppose que la case directement au Nord de la position (x, y) a pour coordonnées (x, y+1).
 
 Pour programmer la tondeuse, on lui fournit un fichier d'entrée construit comme suit :
-    - La première ligne correspond aux coordonnées du coin supérieur droit de la pelouse, celles
-      du coin inférieur gauche sont supposées être (0,0)
-    - La suite du fichier permet de piloter toutes les tondeuses qui ont été déployées. Chaque
-      tondeuse a deux lignes la concernant :
-        * la première ligne donne la position initiale de la tondeuse, ainsi que son orientation. La
-          position et l'orientation sont fournies sous la forme de 2 chiffres et d’une lettre, séparés
-          par un espace
-        * la seconde ligne est une série d'instructions ordonnant à la tondeuse d'explorer la
-          pelouse. Les instructions sont une suite de caractères sans espaces.
-          
+    <ul>
+        <li> La première ligne correspond aux coordonnées du coin supérieur droit de la pelouse, celles
+             du coin inférieur gauche sont supposées être (0,0)</li>
+        <li> La suite du fichier permet de piloter toutes les tondeuses qui ont été déployées. Chaque
+             tondeuse a deux lignes la concernant :</li>
+             <ul>
+                <li> la première ligne donne la position initiale de la tondeuse, ainsi que son orientation. La
+                     position et l'orientation sont fournies sous la forme de 2 chiffres et d’une lettre, séparés
+                     par un espace </li>
+                <li> la seconde ligne est une série d'instructions ordonnant à la tondeuse d'explorer la
+                     pelouse. Les instructions sont une suite de caractères sans espaces.</li>
+          </ul>
+     </ul>     
 Chaque tondeuse se déplace de façon séquentielle, ce qui signifie que la seconde tondeuse ne
 bouge que lorsque la première a exécuté intégralement sa série d'instructions.
 
@@ -44,16 +47,16 @@ JavaScript, Typescript, Python, Go (Si vous souhaitez utiliser un autre langage,
 avant auprès de votre chargé de recrutement)
 Ce programme devra implémenter la spécification ci-dessus et passer le test ci-après.
 
-TEST
-Le fichier suivant est fourni en entrée :
-5 5
-1 2 N
-GAGAGAGAA
-3 3 E
-AADAADADDA
+TEST <br>
+Le fichier suivant est fourni en entrée : <br>
+5 5 <br>
+1 2 N <br>
+GAGAGAGAA <br>
+3 3 E <br>
+AADAADADDA <br>
 
-On attend le résultat suivant (position finale des tondeuses) :
-1 3 N
-5 1 E
+On attend le résultat suivant (position finale des tondeuses) : <br>
+1 3 N <br>
+5 1 E <br>
 
-NB: Les données en entrée sont injectées sous forme de fichier.
+NB: Les données en entrée sont injectées sous forme de fichier. <br>
