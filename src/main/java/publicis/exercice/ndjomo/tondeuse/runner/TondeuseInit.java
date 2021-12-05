@@ -1,14 +1,10 @@
 package publicis.exercice.ndjomo.tondeuse.runner;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import publicis.exercice.ndjomo.tondeuse.configurations.MowerConfiguration;
 import publicis.exercice.ndjomo.tondeuse.configurations.MowerProperties;
 import publicis.exercice.ndjomo.tondeuse.services.AbstractArchiveProgram;
@@ -20,10 +16,9 @@ import java.util.List;
 /**
  * Ce service permet de lancer la tondeuse
  */
-@Component
+@Service
+@Slf4j
 public class TondeuseInit {
-
-    Logger logger = LoggerFactory.getLogger(TondeuseInit.class);
 
     @Autowired
     private MowerProperties                     mowerProperties;
@@ -50,7 +45,7 @@ public class TondeuseInit {
 
 
         if (programme.size() != 0) {
-            logger.info("-- Début d'exécution du programme --");
+            log.info("-- Début d'exécution du programme --");
             // Pagination des instruction - regrouper pour chaque tondeuse sur 2 ligne
             // Index de début = 1 et
             List<List<String>> groupeInstruction = PaginationList.getPages(programme.subList(1, programme.size()), 2);
@@ -68,15 +63,15 @@ public class TondeuseInit {
                         tondeuse.getGrassField().locate();
 
                     } catch (Exception e) {
-                        logger.error("La tondeuse n'a pas finit son travail : " + e.getMessage());
+                        log.error("Une erreur est subvenue, la tondeuse n'a pas finit son travail : " + e.getMessage());
                     }
                 }
             });
 
-            logger.info("-- Archivage du programme --");
+            log.info("-- Archivage du programme --");
             // Archivage
             archiv.archiv(mowerProperties.getFolder().getInstruction(), mowerProperties.getFolder().getArchive());
-            logger.info("-- Fin d'exécution du programme --");
+            log.info("-- Fin d'exécution du programme --");
         }
     }
 }

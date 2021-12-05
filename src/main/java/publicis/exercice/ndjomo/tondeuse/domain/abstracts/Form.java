@@ -41,7 +41,7 @@ public interface Form <T> {
      * Affichage d'une position
      * @return
      */
-    public String locate();
+    public void locate();
 
     /**
      * Parcourir la forme

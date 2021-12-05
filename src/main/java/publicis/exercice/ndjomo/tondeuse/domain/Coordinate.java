@@ -1,8 +1,8 @@
 package publicis.exercice.ndjomo.tondeuse.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import publicis.exercice.ndjomo.tondeuse.exception.BuisnessException;
 import publicis.exercice.ndjomo.tondeuse.utils.CircularList;
 
@@ -10,25 +10,33 @@ import java.util.Arrays;
 
 @Getter
 @Setter
-@Builder
+@Slf4j
 public class Coordinate {
+
     private int x;
     private int y;
     private char orientation;
-    private CircularList<Character> directions = (CircularList<Character>) Arrays.asList('W','N','E','S');
+
+    private CircularList<Character> circularDirections = new CircularList<>(Arrays.asList('W','N','E','S'));
 
     public Coordinate(String location) throws Exception {
         this.buildWithString(location);
     }
 
-    public void move(char movement, Coordinate cornerCoodinate) throws Exception {
-        int indexCourant = directions.get(orientation);
+    /**
+     * Déplacement de la tondeuse. Rotation 90 ° droite et gauche ou Avancement d'une case
+     * @param movement
+     * @param cornerCoodinate
+     * @throws Exception
+     */
+    public void move(char movement, Coordinate cornerCoodinate) {
+        int indexCourant = circularDirections.indexOf(orientation);
         switch (movement) {
             case 'D':
-                this.orientation = directions.get(indexCourant - 1);
+                this.orientation = circularDirections.get(indexCourant + 1);
                 break;
             case 'G':
-                this.orientation = directions.get(indexCourant + 1);
+                this.orientation = circularDirections.get(indexCourant - 1);
                 break;
             case 'A':
                 switch (orientation) {
@@ -36,7 +44,7 @@ public class Coordinate {
                         if(x > 0) x--;
                         break;
                     case 'N':
-                        if(x < cornerCoodinate.getY()) y++;
+                        if(y < cornerCoodinate.getY()) y++;
                         break;
                     case 'E':
                         if(x < cornerCoodinate.getX()) x++;
@@ -48,7 +56,7 @@ public class Coordinate {
                 }
                 break;
             default :
-                throw new BuisnessException("L'instruction " + movement + " n'est pas reconnue par la tondeuse !");
+                log.warn("L'instruction " + movement + " n'est pas reconnue par la tondeuse !");
         }
     }
 
@@ -57,16 +65,25 @@ public class Coordinate {
      * @param location
      */
     public void buildWithString(String location) throws Exception {
-        char[] ch = location.toCharArray();
-        if(ch.length != 3 && ch.length != 2) {
+        String[] ch = location.split(" ");
+        if (ch.length != 2 && ch.length != 3) {
             throw new BuisnessException("Impossible d'initialiser la tondeuse");
         }
-        this.x = ch[0];
-        this.y = ch[1];
-        if(ch.length == 3) this.orientation = ch[2];
+        this.x = Integer.parseInt(ch[0]);
+        this.y = Integer.parseInt(ch[1]);
+        if (ch.length == 3) this.orientation = ch[2].charAt(0);
     }
 
+    /**
+     * Renvoie la position de la tondeuse
+     * @return
+     */
     public String toString() {
-        return x + y + orientation + "";
+        StringBuilder printer = new StringBuilder();
+        return printer
+                .append(x).append(" ")
+                .append(y).append(" ")
+                .append(orientation)
+                .toString();
     }
 }
