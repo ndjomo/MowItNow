@@ -7,6 +7,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.Assert;
 import publicis.exercice.ndjomo.tondeuse.domain.abstracts.Form;
+import publicis.exercice.ndjomo.tondeuse.runner.Tondeuse;
+import publicis.exercice.ndjomo.tondeuse.services.AbstractArchiveProgram;
 import publicis.exercice.ndjomo.tondeuse.services.AbstractInstructionReaderServices;
 
 
@@ -21,9 +23,17 @@ public class AbstractPublicisSapientTest {
     @Autowired
     private Form grassField;
 
+    @Autowired
+    private Tondeuse tondeuse;
+
+    @Autowired
+    private AbstractArchiveProgram archiv;
+
     @Test
     void contextLoads() {
         Assert.notNull(reader);
         Assert.notNull(grassField);
+        Assert.notNull(tondeuse);
+        Assert.notNull(archiv);
     }
 }
