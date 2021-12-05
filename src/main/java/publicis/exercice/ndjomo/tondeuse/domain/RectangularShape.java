@@ -1,5 +1,6 @@
 package publicis.exercice.ndjomo.tondeuse.domain;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 import publicis.exercice.ndjomo.tondeuse.domain.abstracts.Form;
 
@@ -7,6 +8,7 @@ import publicis.exercice.ndjomo.tondeuse.domain.abstracts.Form;
  * Implémentation d'un terrain rectangulaire
  */
 @Component
+@Getter
 public class RectangularShape implements Form<Coordinate> {
 
     /**
@@ -59,8 +61,8 @@ public class RectangularShape implements Form<Coordinate> {
     }
 
     @Override
-    public String locate() {
-        return currentCoodinat.toString();
+    public void locate() {
+        System.out.println(currentCoodinat.toString());
     }
 
     /**
