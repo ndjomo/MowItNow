@@ -7,8 +7,8 @@ import java.util.List;
  * @param <E>
  * @param <T>
  */
-public interface AbstractInstructionReaderServices<E> {
+public interface AbstractInstructionReaderServices<E, T> {
 
-    public List<String> read(E e) throws Exception;
+    public T read(E e) throws Exception;
 
 }
