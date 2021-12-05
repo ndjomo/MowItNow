@@ -3,7 +3,8 @@ package publicis.exercice.ndjomo.tondeuse.domain;
 import org.junit.jupiter.api.Test;
 import publicis.exercice.ndjomo.tondeuse.exception.BuisnessException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CoordinateTest {
 

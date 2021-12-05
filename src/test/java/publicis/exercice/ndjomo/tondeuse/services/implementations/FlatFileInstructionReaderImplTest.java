@@ -1,25 +1,22 @@
 package publicis.exercice.ndjomo.tondeuse.services.implementations;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.util.Assert;
 import publicis.exercice.ndjomo.tondeuse.AbstractPublicisSapientTest;
 import publicis.exercice.ndjomo.tondeuse.configurations.MowerProperties;
-import publicis.exercice.ndjomo.tondeuse.domain.Coordinate;
-import publicis.exercice.ndjomo.tondeuse.exception.BuisnessException;
 import publicis.exercice.ndjomo.tondeuse.runner.TondeuseInit;
 import publicis.exercice.ndjomo.tondeuse.services.AbstractInstructionReaderServices;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FlatFileInstructionReaderImplTest extends AbstractPublicisSapientTest {
 
@@ -33,6 +30,21 @@ class FlatFileInstructionReaderImplTest extends AbstractPublicisSapientTest {
 
     @Value( "${tondeuse.folder.instruction.errorfile}" )
     private String errorSourcePath;
+
+    @Value( "${tondeuse.folder.instruction.testfile}" )
+    private String testFilePath;
+
+    @Value( "${tondeuse.folder.instruction.sourcetestfile}" )
+    private String folderTestFilePath;
+
+    /**
+     * Copy du fichier de test dans le dossier d'instruction
+     * @throws IOException
+     */
+    @BeforeEach
+    public void initTest() throws IOException {
+        Files.copy(Paths.get(testFilePath), Paths.get(folderTestFilePath).resolve("imput-test.txt"), StandardCopyOption.REPLACE_EXISTING);
+    }
 
     /**
      * Test de lecture de la source
@@ -49,13 +61,11 @@ class FlatFileInstructionReaderImplTest extends AbstractPublicisSapientTest {
 
     /**
      * Test d'erreur de lecture du fichier de programme
+     * Aucune instruction n'est retourné
      */
     @Test
-    public void errorRead() {
-        Exception exception = assertThrows(IOException.class, () -> {
-            reader.read(Paths.get(errorSourcePath));
-        });
-
-        assertNotNull(exception);
+    public void errorRead() throws Exception {
+        List<String> programme = (List<String>) reader.read(Paths.get(errorSourcePath));
+        assertTrue(programme.isEmpty());
     }
 }

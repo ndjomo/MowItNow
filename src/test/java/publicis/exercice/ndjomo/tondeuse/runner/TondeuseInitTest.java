@@ -7,8 +7,6 @@ import publicis.exercice.ndjomo.tondeuse.AbstractPublicisSapientTest;
 import publicis.exercice.ndjomo.tondeuse.configurations.MowerProperties;
 import publicis.exercice.ndjomo.tondeuse.services.AbstractInstructionReaderServices;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TondeuseInitTest extends AbstractPublicisSapientTest {
 
 
